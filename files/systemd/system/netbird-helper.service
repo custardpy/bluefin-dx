@@ -1,0 +1,12 @@
+[Unit]
+Description=Netbird Helper Simple Service
+After=network.target
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/bin/mkdir /var/log/netbird
+ExecStart=/usr/bin/chmod 750 /var/log/netbird
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

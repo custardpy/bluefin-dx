@@ -3,11 +3,11 @@
 # image will be published to ghcr.io/<user>/<name>
 name: bluefin-dx
 # description will be included in the image's metadata
-description: This is my personal OS image.
+description: My personal bluefin-dx image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/bluefin-dx
+image-version: 43 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -18,19 +18,33 @@ modules:
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: dnf
-    repos:
-      copr:
-        - atim/starship
-    install:
-      packages:
-        - micro
-        - starship
+    #  repos:
+    #    copr:
+    #      - atim/starship
+    #  install:
+    #    packages:
+    #      - micro
+    #      - starship
     remove:
       packages:
+        - tailscale
         # example: removing firefox (in favor of the flatpak)
         # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+    #    - firefox
+    #    - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+
+  - type: rpm-ostree
+    repos:
+      - netbird.repo
+    install:
+      - netbird
+      - netbird-ui
+
+  - type: systemd
+    system:
+      enabled:
+        - netbird-helper.service
+        - netbird.service
 
   - type: default-flatpaks
     configurations:
@@ -38,8 +52,45 @@ modules:
         scope: system
         # If no repo information is specified, Flathub will be used by default
         install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
-
+          - app.zen_browser.zen/x86_64/stable
+          - com.bambulab.BambuStudio/x86_64/stable
+          - com.github.PintaProject.Pinta/x86_64/stable
+          - com.github.tchx84.Flatseal/x86_64/stable
+          - com.mattermost.Desktop/x86_64/stable
+          - com.mattjakeman.ExtensionManager/x86_64/stable
+          - com.ranfdev.DistroShelf/x86_64/stable
+          - com.synology.SynologyDrive/x86_64/stable
+          - dev.zed.Zed/x86_64/stable
+          - io.github.flattool.Ignition/x86_64/stable
+          - io.github.flattool.Warehouse/x86_64/stable
+          - io.github.kolunmi.Bazaar/x86_64/stable
+          - io.github.prateekmedia.appimagepool/x86_64/stable
+          - io.gitlab.adhami3310.Impression/x86_64/stable
+          - io.missioncenter.MissionCenter/x86_64/stable
+          - org.gnome.Calculator/x86_64/stable
+          - org.gnome.Calendar/x86_64/stable
+          - org.gnome.Characters/x86_64/stable
+          - org.gnome.Connections/x86_64/stable
+          - org.gnome.Contacts/x86_64/stable
+          - org.gnome.FileRoller/x86_64/stable
+          - org.gnome.Firmware/x86_64/stable
+          - org.gnome.Logs/x86_64/stable
+          - org.gnome.Loupe/x86_64/stable
+          - org.gnome.Maps/x86_64/stable
+          - org.gnome.NautilusPreviewer/x86_64/stable
+          - org.gnome.Papers/x86_64/stable
+          - org.gnome.Showtime/x86_64/stable
+          - org.gnome.SimpleScan/x86_64/stable
+          - org.gnome.Snapshot/x86_64/stable
+          - org.gnome.TextEditor/x86_64/stable
+          - org.gnome.Weather/x86_64/stable
+          - org.gnome.World.PikaBackup/x86_64/stable
+          - org.gnome.baobab/x86_64/stable
+          - org.gnome.clocks/x86_64/stable
+          - org.gnome.font-viewer/x86_64/stable
+          - org.mozilla.Thunderbird/x86_64/stable
+          - org.remmina.Remmina/x86_64/stable
+          - org.telegram.desktop/x86_64/stable
+          - page.tesk.Refine/x86_64/stable
+        #scope: user # Also add Flathub user repo, but no user packages
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
