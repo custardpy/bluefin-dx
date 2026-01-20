@@ -2,7 +2,11 @@
 
 See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
 
-After setup, it is recommended you update this README to describe your custom image.
+This is my personal repository for building custom bluefin-dx image.
+Key differences from the official build are:
+- removed tailscale service
+- installed netbird/netbird-ui
+- installed my personal selection of flatpak apps (see recipe.yml for the list)
 
 ## Installation
 
