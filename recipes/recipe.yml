@@ -46,6 +46,23 @@ modules:
         - netbird-helper.service
         - netbird.service
 
+  - type: gnome-extensions
+    uninstall:
+      - GSConnect
+      - Apps Menu
+      - Caffeine
+      - Dash to Dock
+      - Launch New Instance
+      - Places Status Indicator
+      #- Window List
+    install:
+      - Bubblemail
+      - Weather or Not
+      - AppIndicator and KStatusNotifierItem Support
+      - Blur my Shell
+      - Logo Menu
+      - Search Light
+
   - type: default-flatpaks
     configurations:
       - notify: true # Send notification after install/uninstall is finished (true/false)
