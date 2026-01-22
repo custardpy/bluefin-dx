@@ -7,6 +7,7 @@ Key differences from the official build are:
 - removed tailscale service
 - installed netbird/netbird-ui
 - installed my personal selection of flatpak apps (see recipe.yml for the list)
+- updated my personal selection of gnome-shell extensions (see recipe.yml for the list)
 
 ## Installation
 
