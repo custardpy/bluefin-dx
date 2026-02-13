@@ -58,7 +58,7 @@ modules:
     install:
       - Bubblemail
       - Weather or Not
-      - AppIndicator and KStatusNotifierItem Support
+      #- AppIndicator and KStatusNotifierItem Support
       - Blur my Shell
       - Logo Menu
       - Search Light
