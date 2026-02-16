@@ -59,9 +59,9 @@ modules:
       - Bubblemail
       - Weather or Not
       #- AppIndicator and KStatusNotifierItem Support
-      - Blur my Shell
-      - Logo Menu
-      - Search Light
+      #- Blur my Shell
+      #- Logo Menu
+      #- Search Light
 
   - type: default-flatpaks
     configurations:
